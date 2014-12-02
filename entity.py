@@ -40,5 +40,7 @@ class Entity:
         self.state = []
         for i in xrange(0, state_array_length):
             x = randint(neighborhood_size*-1, neighborhood_size)
-            y = randint(neighborhood_size*-1, neighborhood_size)            
+            y = randint(neighborhood_size*-1, neighborhood_size)
+            if x == 0:
+                x = 1           
             self.state.append((x,y))

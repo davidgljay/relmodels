@@ -49,8 +49,8 @@ class Landscape:
                     else:
                         self.output_log[-1].append(5)
                         self.switch_log[-1].append(2)
-                        if (randint(0,1000) == 1):
-                            entity.entropy = 20
+                        if (randint(0,50000) == 1):
+                            entity.entropy = 0
                     self.entropy_log[-1].append(entity.entropy)
                     
                     
