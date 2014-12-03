@@ -93,3 +93,14 @@ def phasespacemap(values, dividers, title="", sort = True, mode="delta"):
     axes.set_ylim([-1,maxy+1])
     plt.show()
 
+import networkx as nx
+
+def networkGraph(log, frame=-1):
+    network = nx.Graph()
+    for node in log[frame]:
+        network.add_edge(node[0], node[1])
+        print node
+        if node[0] == node[1]:
+            print "self reference!"
+    nx.draw_shell(network, node_color='b')
+
