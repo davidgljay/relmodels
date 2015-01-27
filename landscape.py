@@ -30,22 +30,26 @@ class Landscape:
                     entity = self.model[i][j]
                     if (entity.entropy < entity.max_entropy):
                         send = entity.send()
-                        t = send[0]
+                        targets = send[0]
                         self.switch_log[-1].append(send[1])
-                        tx = t[0]+i
-                        ty = t[1]+j
-                        while(tx >= len(self.model)):
-                            tx -= len(self.model)
-                        while(ty >= len(self.model[i])):
-                            ty -= len(self.model[i])
-
-                        target = self.model[tx][ty]
-                        if(target):
-                            target.receive()
-                            self.transaction_log[-1].append([(i,j),(tx,ty)])
-                            self.output_log[-1].append(0)
-                        else:
-                            self.output_log[-1].append(1)
+                        for t in targets:
+                            tx = t[0]+i
+                            ty = t[1]+j
+                            while(tx >= len(self.model)):
+                                tx -= len(self.model)
+                            if (tx < 0):
+                                tx += len(self.model)
+                            while(ty >= len(self.model[i])):
+                                ty -= len(self.model[i])
+                            if (ty < 0):
+                                ty += len(self.model[i])
+                            target = self.model[tx][ty]
+                            if(target):
+                                target.receive()
+                                self.transaction_log[-1].append([(i,j),(tx,ty)])
+                                self.output_log[-1].append(0)
+                            else:
+                                self.output_log[-1].append(1)
                     else:
                         self.output_log[-1].append(5)
                         self.switch_log[-1].append(2)

@@ -9,8 +9,9 @@ class Entity:
         self.reduction_on_receive = config["reduction_on_receive"]
         self.increase_on_send = config["increase_on_send"]
         self.state_index = 0
-        self.generate_state(config["state_array_length"],config["neighborhood_size"])
         self.entropy = config["starting_entropy"]
+        self.num_targets = config["num_targets"] 
+        self.generate_state(config["state_array_length"],config["neighborhood_size"])
         
     #Randomly state_index based on entropy and returns a target
     def send(self):
@@ -39,8 +40,10 @@ class Entity:
     def generate_state(self, state_array_length, neighborhood_size):
         self.state = []
         for i in xrange(0, state_array_length):
-            x = randint(neighborhood_size*-1, neighborhood_size)
-            y = randint(neighborhood_size*-1, neighborhood_size)
-            if x == 0:
-                x = 1           
-            self.state.append((x,y))
+            self.state.append([])
+            for j in range(0, self.num_targets):
+                x = randint(neighborhood_size*-1, neighborhood_size)
+                y = randint(neighborhood_size*-1, neighborhood_size)
+                if x == 0:
+                    x = 1           
+                self.state[-1].append((x,y))
