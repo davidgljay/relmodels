@@ -29,6 +29,10 @@ def getx(xy):
 def gety(xy):
     return xy[1]
 
+def scatterplot(data, title=""):
+    fig, axes = plt.subplots(figsize=(16,8))
+    axes.scatter(data[0],data[1])
+
 def phasespacemap(values, dividers, title="", sort = True, mode="delta"):
     if mode == "delta":
         sets = [[]]
